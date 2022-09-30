@@ -228,7 +228,7 @@ class ReportAccountAgedPartnerCustomize(models.AbstractModel):
                     period_table.date_stop IS NULL
                     OR COALESCE(account_move_line.date_maturity, account_move_line.date) >= DATE(period_table.date_stop)
                 )
-                WHERE account.internal_type = %(account_type)s AND move.name !~ 'EXCH.*'
+                WHERE account.internal_type = %(account_type)s AND move.name !~ 'EXCH.*' AND move.name !~ 'MISC.*'
                 GROUP BY account_move_line.id, partner.id, trust_property.id, journal.id, move.id, account.id,
                          period_table.period_index, currency_table.rate, currency_table.precision, 
                          so.id,
